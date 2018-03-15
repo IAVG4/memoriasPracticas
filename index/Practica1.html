@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Metainformación sobre el documento-->
+      <meta charset="utf-8">
+      <meta name="author" content="Grupo 10 - IU" /> 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+      <!-- Etiquetas para el navegador-->
+      <meta name="keywords" content="IU, HTML, UCM, Kingdom Hearts III, Kingdom, Hearts, III, informática, web" />
+      <meta name="description" content="Kingdom Hearts III" />
+
+        <!-- Links -->
+      <link rel="icon" href="./images/logoUCM.png">
+        <!-- Bootstrap core CSS -->
+      <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+          <!-- Bootstrap theme -->
+      <link href="../dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+      <link href="../css/estilosPropios.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xs-3 col-sm-2 col-md-2 sidebar">
+            <a href="../Inicio.html"><img src = "../images/logoUCM.png" class= "img-responsive" alt= "Imagen responsive"></a>
+
+            <ul class="nav nav-sidebar">
+
+            <li><a href="../Inicio.html"><b>Inicio</b></a></li>
+            <li class="active"><a href="./index/Practica1.html">Práctica 1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="../index/Practica2.html"><b>Práctica 2</b></a></li>
+            <!--<li><a href="./Practica3.html"><b>Práctica 3</b></a></li>
+            <li><a href="./Practica4.html"><b>Práctica 4</b></a></li>
+            <li><a href="./Practica5.html"><b>Práctica 5</b></a></li>
+            <li><a href="./Practica6.html"><b>Práctica 6</b></a></li>-->
+
+          </ul>
+        </div>
+
+
+
+      <div class="col-xs-offset-1 col-xs-10 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3 main">
+      <div class="container-fluid">
+
+      <div class="row">
+
+          <div class="jumbotron">
+
+              <h1 class="text-center">Práctica 1</h1>
+              <br>
+
+                <h2><b>Resumen</b></h2>
+                <br>
+                 
+                  <p>
+                    Aplicación para crear tu propio problema de 8-puzzle a partir de la solución correcta. Posee una inteligencia artificial capaz de resolverlo y mostrar al usuario el procedimiento para su resolución.
+                  </p>
+                
+                <hr>
+                <br>
+
+                <h2><b>Problema a resolver</b></h2>
+                <br>
+
+                  <p>
+                  	El Puzzle deslizante (Sliding-Puzzle en Inglés) o 8-puzzle en su versión 3x3 es un rompecabezas inventado y popularizado por Noyes Palmer Chapman en la década de 1870. Se juega en una cuadrícula de 3 por 3 con 8 bloques cuadrados etiquetados del 1 al 8 y un cuadrado en blanco. Tu objetivo es reorganizar los bloques para que estén en orden. En nuestro caso la solución correcta y la que dará la aplicación por buena será:
+
+                  </p>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/puzzle.png" class= "img-responsive" alt= "Imagen responsive" width = "100" height = "100"></a></div>
+                  </div>
+                  <br>
+                  <br>
+                  <p>
+                  	Para resolver el puzzle solo podrás mover las fichas adyacentes (arriba, abajo, derecha e izquierda) a la posición vacía. Al mover una ficha esta ocupará la posición vacía y la posición desde que se ha desplazado pasará a ser la nueva posición vacía. A continuación, se muestra una secuencia de movimientos legales desde un estado inicial (izquierda) hasta el estado resuelto (derecha).
+                  </p>
+
+                  <p>
+                    1  3  0   =>   1  0  3   =>   1  2  3  =>     1  2  3   =>   1  2  3
+                    <br>
+                    4  2  5   =>   4  2  5   =>   4  0  5  =>     4  5  0   =>   4  5  6
+                    <br>
+                    7  8  6   =>   7  8  6   =>   7  8  6  =>     7  8  6   =>   7  8  0
+                  </p>
+
+                    <hr>
+                    <br>
+
+                      
+                    <h2><b>Métodos de resolución</b></h2>
+                    <br>
+                    <p>
+                    	La aplicación puede resolver el rompecabezas con 2 algoritmos diferentes:
+                    </p>
+                    <br>
+                    <ul>
+                      <h3><li type="disc"><b>Hamming</b></li></h3>
+                      <p>
+                        Definimos el estado del juego como la posición del tablero y el número de movimientos realizados para llegar a la posición del tablero. Partiendo del estado inicial como estado actual del tablero, calculamos los posibles estados a los que se podría llegar. Calculamos los costes de los posibles estados y los comparamos con el coste del estado actual. Si el coste de uno de los estados calculados supera al coste del estado actual descartamos pasar a ese estado y en caso contrario dicho estado pasará a ser el estado actual. Este proceso se repetirá hasta que el estado actual sea la solución correcta. El cálculo del coste se hace sumando la cantidad de bloques en la posición incorrecta, más el número de movimientos realizados hasta el momento para llegar al estado.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Manhattan</b></li></h3>
+                      <p>
+                        Definimos el estado del juego como la posición del tablero y el número de movimientos realizados para llegar a la posición del tablero. Partiendo del estado inicial como estado actual del tablero, calculamos los posibles estados a los que se podría llegar. Calculamos los costes de los posibles estados y los comparamos con el coste del estado actual. Si el coste del estado actual es menor que el de un posible estado hacemos que ese posible estado pase a ser el estado actual y en caso contrario descartamos ese posible estado. Esto lo repetiremos hasta que el estado actual sea la solución correcta. El coste se calcula con la suma de las distancias (suma de la distancia vertical y horizontal) desde los bloques hasta sus posiciones de objetivo, más el número de movimientos realizados hasta el momento para llegar al estado.
+                      </p>
+                    </ul>
+                   
+                    <hr>
+                <br> 
+                    <h2><b>Herramientas utilizadas</b></a></h2>
+                    <br>
+
+                     <h4><li type="disc"><b>Unity:</b> motor de la aplicación</li></h4>
+                     <h4><li type="disc"><b>Monodevelop:</b> Entorno de desarrollo</li></h4>
+                     <h4><li type="disc"><b>C#:</b> lenguaje de programación</li></h4>
+
+                     <hr>
+                <br> 
+                    <h2><b>Implementación</b></a></h2>
+                    <br>
+
+                    <ul>
+                      <h4> 
+                        <li><b>LogicaFicha:</b> componente de cada ficha de la matriz 
+                          <ul> 
+                            <li><b>Vector2 position:</b> posición lógica de la ficha dentro de la matriz.</li> 
+                            <li><b>int valor:</b> número que sirvepara identificar cada ficha.</li> 
+                            <li><b>TriToMove():</b>  llama a Traslada() si puede la ficha puede ser movida.</li>
+                            <li><b>CanMove():</b>indica si la ficha puede ser movida.</li>
+                            <li><b>Traslada():</b> cambia la ficha visualmente y llama a Swap() del GameManager.</li> 
+                          </ul> 
+                        </li>
+                        <br> 
+                        <li>
+                          <b>GameManager:</b> gestiona y realiza los movimientos de la matriz y lee el input de teclado:
+                          <ul>
+                            <li><b>GameObject [,] tablero:</b>matriz principal del juego</li>
+                            <li><b>int [,] tableroOriginal:</b> matriz en la que guardamos la solución correcta.</li>
+                            <li><b>int [,] tableroInt:</b> matriz auxiliar que se pasa a los métodos resolutores de los rompecabezas.</li>
+                            <li><b>Start():</b> rellenamos las matrices.</li>
+                            <li><b>Update():</b> leemos input de teclado.</li>
+                            <li><b>Swap():</b> cambiamos de posición las fichas a nivel lógico en la matriz tablero.</li>
+                            <li><b>rellenaTableroEnteros():</b> rellena tableroInt.</li>
+                            <li><b>rellenarTabero():</b> rellena tablero.</li>
+                            <li><b>rellenarTableroOriginal():</b> rellena tableroOriginal.</li>
+                            <li><b>resolver():</b> recibe la solución de los algoritmos y mueve las fichas de tablero para hacerla visible.</li>
+                            <li><b>dameFicha():</b> utilizado por resolver() y devuelve la posición lógica de una ficha a través de haberle pasado su valor.
+                            </li>
+                          </ul>
+                        </li>
+                        <br>
+                        <li>
+                          <b>Hamming:</b> Implementa el algoritmo Hamming Priority Function.
+                          <ul>
+                            <li><b>int [,] originalPositionBlocks:</b>matriz en la que guardamos la solución correcta.</li>
+                            <li>
+                              <b>Struct State:</b> Estado del tablero.
+                              <ul>
+                                <li><b>public int [,] blocks:</b> guarda el estado del tablero.</li>
+                                <li><b>Vector2 emptyBlockPos:</b> guarda la posición de la casilla vacía.</li>
+                                <li><b>calculateCost():</b> calcula el coste del estado.</li>
+                                <li><b>findEmpty():</b> actualiza emptyBlockPos.</li>
+                                <li><b>swap():</b> intercambia los valores de blocks.</li>
+                                <li><b>State():</b> constructora del struct State.</li>
+                              </ul>
+                            </li>
+                            <li><b>ResolveHamming():</b> gestiona el bucle principal del algoritmo.</li>
+                            <li><b>isSolved():</b> te dice si el estado  ya es la solución correcta.</li>
+                            <li><b>resuelve():</b> actuliza el estado actual.</li>
+                            <li><b>rellenarTableroOriginal():</b> rellena originalPositionBocks.</li>
+                          </ul>
+                        </li>
+                        <br>
+                        <li>
+                          <b>Manhattan:</b> Implementa el algoritmo Manhattan Priority Function.
+                          <ul>
+                            <li><b>int [,] originalPositionBlocks:</b>matriz en la que guardamos la solución correcta.</li>
+                            <li>
+                              <b>Struct State:</b> Estado del tablero.
+                              <ul>
+                                <li><b>public int [,] blocks:</b> guarda el estado del tablero.</li>
+                                <li><b>Vector2 emptyBlockPos:</b> guarda la posición de la casilla vacía.</li>
+                                <li><b>calculateCost():</b> calcula el coste del estado.</li>
+                                <li><b>findEmpty():</b> actualiza emptyBlockPos.</li>
+                                <li><b>swap():</b> intercambia los valores de blocks.</li>
+                                <li><b>State():</b> constructora del struct State.</li>
+                              </ul>
+                            </li>
+                            <li><b>ResolveHamming():</b> gestiona el bucle principal del algoritmo.</li>
+                            <li><b>isSolved():</b> te dice si el estado  ya es la solución correcta.</li>
+                            <li><b>resuelve():</b> actuliza el estado actual.</li>
+                            <li><b>rellenarTableroOriginal():</b> rellena originalPositionBocks.</li>
+                          </ul>
+                        </li>
+                      </h4>
+                    </ul>
+                    <hr>
+                  <br>
+                     <h2><b>Resultados obtenidos</b></h2>
+                     <br>
+
+                    <p>
+                      Resuelve los rompecabezas de manera rápida, pero sorprende el gran número de nodos y el coste computacional que requieren los algoritmos. Esto hace que con problemas con un alto número de movimiento pueda llegar a ser menos eficiente, esto se debe a que Unity no es capaz de procesar toda la información y soportar todo el coste computacional.
+                    </p>
+
+                    <ul>
+                      <h3><li type="disc"><b>Objetivos completados</b></li></h3>
+                      <p>
+                        Aplicación perfectamente funcional que permite la creación de un 8-puzzle 3x3 con solución. Implementación de 2 algoritmos eficientes de resolución del rompecabezas, los cuales son Manhattan priority function y Hamming Priority Function.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
+                      <p>
+                        No hemos sido capaces generalizar la aplicación. Teníamos la estructura  montada pero no hemos conseguido enlazarla con los algoritmos debido a la falta de tiempo.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Dificultades</b></li></h3>
+                      <p>
+                        En la implementación de los algoritmos tuvimos problemas y perdimos mucho tiempo debido a mezclar la parte lógica del algoritmo con la parte visual de Unity. Esto hacía que fuera ineficiente y no funcionase debido al funcionamiento interno de Unity, el cual funciona con referencias y no con copias profundas. Por lo que otro problema fue la utilización de las herramientas debido a nuestro no muy alto conocimiento de ellas.  
+                      </p>
+                      <p>
+                        Otro inconveniente fue la pérdida de tiempo en intentar unir los algoritmos con nuestra estructura para generalizar los puzzles, lo cual al final no conseguimos hacer.
+                      </p>
+
+                    </ul>
+
+                    <hr>
+                <br>
+                    <h2><b>Relación bibliográfica</b></h2>
+                    <br>
+
+                    <p><a href="http://www.cs.princeton.edu/" target="_blank" >
+                     www.cs.princeton.edu 
+                    </a></p>
+                    <p><a href="http://www.stackoverflow.com/" target="_blank" >
+                    www.stackoverflow.com
+                    </p>
+                    <p><a href="http://www.unity3d.com/" target="_blank" >
+                    www.unity3d.com
+                    </p>
+                    <p><a href="http://www.forum.unity.com/" target="_blank" >
+                    www.forum.unity.com 
+                    </p>
+                    <p><a href="http://www.microsoft.com/" target="_blank" >
+                    www.microsoft.com 
+                    </p>
+                    <p><a href="http://www.youtube.com/user/Cercopithecan/" target="_blank" >
+                    www.youtube.com/user/Cercopithecan
+                    </p>
+                    <p><a href="http://www.youtube.com/channel/UCQA9tK0nRK1e_Bqg0uETs8A/" target="_blank" >
+                    www.youtube.com/channel/UCQA9tK0nRK1e_Bqg0uETs8A
+                    </p>
+                    <p><a href="http://www.youtube.com/channel/UCl1Tqc3U-TAOjuh4izHLsUw/" target="_blank" >
+                    www.youtube.com/channel/UCl1Tqc3U-TAOjuh4izHLsUw 
+                    </p>
+
+            </div>
+
+          </div>
+      </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
