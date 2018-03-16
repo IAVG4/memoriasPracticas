@@ -76,27 +76,40 @@
                        <div class="col-10 col-md-100"><img src = "../images/AStarPart.jpg" class= "img-responsive" alt= "Imagen responsive" width = "250" height = "250"></a></div>
                   </div>
                   <br>
-                  <br>
-                  <p>
-                  	A* utiliza una función de evaluación f(n)=g(n)+h'(n), donde h'(n)representa el valor heurístico del nodo a evaluar desde el actual, n, hasta el final, y g(n) g(n), el coste real del camino recorrido para llegar a dicho nodo, n, desde el nodo inicial. A* mantiene dos estructuras de datos auxiliares, que podemos denominar abiertos, implementado como una cola de prioridad (ordenada por el valor f(n) de cada nodo), y cerrados, donde se guarda la información de los nodos que ya han sido visitados. En cada paso del algoritmo, se expande el nodo que esté primero en abiertos, y en caso de que no sea un nodo objetivo, calcula la f(n) de todos sus hijos, los inserta en abiertos, y pasa el nodo evaluado a cerrados.
-                  </p>
+                  
 
                     <hr>
                     <br>
 
                       
-                    <h2><b>Métodos de resolución</b></h2>
+                    <h2><b>Método de resolución</b></h2>
                     <br>
+                    <h3><b>A*</b></h3>
                     <p>
-                    	La aplicación encontrará el mejor camino utilizando como heurística Manhattan:
+                    	Nuestro A * o algoritmo de búsqueda resuelve problemas buscando entre todas las rutas posibles y de entre estos caminos primero considera los que parecen conducir más rápidamente a la solución. A partir de un nodo específico de una matriz de nodos construye un árbol de rutas, expandiendo las rutas un paso a la vez, hasta que una de sus rutas termina encontrando el nodo objetivo.
                     </p>
+
+                    <p>
+                    En cada iteración de su bucle principal, el algoritmo determina cuál de sus rutas se expandirá. Esto lo hace con la selección del nodo con la menor estimación del coste, calculada con la función:
+                    </p>
+
+                    <p>
+                    f (n) = g (n) + h (n)
+                    </p>
+
+                    <p>
+                    Donde n es el nodo del que se está calculando el coste, g (n) es el coste de la ruta desde el nodo de inicio a n, y h (n) es una heurística que estima el coste de la ruta más barata desde n hasta el objetivo. 
+                    </p>
+
+                    <p>
+                    Usamos una cola de prioridad (open) para almacenar los nodos con los que se está trabajando y realizar la selección de nodos de coste mínimo. En cada paso del algoritmo, el nodo con el valor f (x) más bajo se elimina de la cola, sus vecinos que no estén en la cola se añaden y a los que ya estén les actualiza sus valores f y g. El algoritmo continúa hasta que un nodo al añadir un vecino encuentre la posición final o hasta que se vacíe la cola (lo que indicaría que no existe solución).
+                    </p>
+
+                    <p>
+                    Para encontrar la secuencia real de pasos, cada nodo almacena su predecesor. Esto permite que después de ejecutar el algoritmo, el nodo final apuntará a su predecesor, y así sucesivamente, hasta que el predecesor de algún nodo sea el nodo de inicio.
+                    </p>
+                    
                     <br>
-                    <ul>
-                      <h3><li type="disc"><b>Manhattan</b></li></h3>
-                      <p>
-                        ... 
-                      </p>
-                    </ul>
                    
                     <hr>
                 <br> 
@@ -106,6 +119,7 @@
                      <h4><li type="disc"><b>Unity:</b> motor de la aplicación</li></h4>
                      <h4><li type="disc"><b>Monodevelop:</b> Entorno de desarrollo</li></h4>
                      <h4><li type="disc"><b>C#:</b> lenguaje de programación</li></h4>
+                     <h4><li type="disc"><b>Cola de prioridad externa.</b></li></h4>
 
                      <hr>
                 <br> 
@@ -161,21 +175,31 @@
                         </li>
                         <br>
                         <li>
-                          <b>Astar1:</b> Es el IAManager.
+                          <b>Astar1:</b> Componente poseedor del algoritmo de búsqueda.
                           <ul>
+                            <li><b>Node[,]tableroNode:</b> Guarda la matriz de nodos.</li>
+                            <li><b>bool [,] marked:</b>Marca las casillas que ya no se tienen que comprobar.</li>
+                            <li><b>FastPriorityQueue &lt;Node&gt; open: </b> Almacena los nodos abiertos (que se están procesnado).</li>
+                            <li><b>int[,] tablero: </b> Recibe y guarda los tipos de casilla.</li>
                             <li>
                               <b>Class Node:</b> Nodo del tablero.
                               <ul>
-                                <li><b>public Vector2 pos:</b> </li>
+                                <li><b>Enum state:</b> marcan el estado de del nodo.</li>
+                                <li><b>public Vector2 pos:</b>coordenadas del nodo.</li>
+                                <li><b>Int h:</b> distancia desde el nodo hasta el nodo objetivo.</li>
+                                <li><b>Int cost:</b>el coste que tiene pasar por ella.</li>
+                                <li><b>Int g:</b>coste para llegas a ese nodo.</li>
+                                <li><b>Int f:</b>h + g.</li>
                                 <li><b>public Node Padre:</b> Representa el nodo padre al actual.</li>
                                 <li><b>public Node():</b> Constructora donde se inicializan los atributos anteriores</li>
                               </ul>
                             </li>
-                            <li><b>bool [,] marked:</b>matriz de </li>
-                            <li><b>public bool buscaCamino():</b> </li>
-                            <li><b>fillMarked():</b> </li>
-                            <li><b>pathFinding():</b> </li>
-                            <li><b>List<Vector2> getPath():</b> </li>
+                            <li><b>List &lt;Vector2&gt; calculatePath()</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
+                            <li><b>int ManhattanDistance():</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
+                            <li><b>Node addNeighbours():</b> añade vecinos a open y devuelve el nodo solución si lo encuentra.</li>
+                            <li><b>fillMarked():</b> Rellena la matriz marked.</li>
+                            <li><b>void fillTableroNode():</b>rellena la matriz tableroNode.</li>
+                            <li><b>List<Vector2> getPath():</b>devuelve la lista de posiciones del recorrido a partir del nodo final.</li>
                           </ul>
                         </li>
                       </h4>
@@ -184,20 +208,15 @@
                   <br>
                      <h2><b>Resultados obtenidos</b></h2>
                      <br>
-
-                    <p>
-                      ...
-                    </p>
-
                     <ul>
                       <h3><li type="disc"><b>Objetivos completados</b></li></h3>
                       <p>
-                        ...
+                        Todo lo relacionado con Unity en la práctica que se utiliza antes de llamar al algoritmo funciona de una manera correcta y eficiente. La implementación de A* utilizada funciona de una manera eficaz.
                       </p>
                       <br>
                       <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
                       <p>
-                        ...
+                        Cuando la ficha llega a su objetivo, si se vuelve a clicar, aparece en la posición en la que se instanció en el tablero. Creemos que es por un problema de copiar el transform de los gameObjects, pero no hemos conseguido corregirlo por el momento.
                       </p>
                       <br>
                       <h3><li type="disc"><b>Dificultades</b></li></h3>
@@ -232,6 +251,12 @@
                     </p>
                     <p><a href="http://buildnewgames.com/astar/" target="_blank" >
                     http://buildnewgames.com/astar
+                    </p>
+                    <p><a href="http://www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ/" target="_blank" >
+                    www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ
+                    </p>
+                    <p><a href="https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp/" target="_blank" >
+                    https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp
                     </p>
             </div>
 
