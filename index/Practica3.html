@@ -33,8 +33,8 @@
 
             <li><a href="../index.html"><b>Inicio</b></a></li>
             <li><a href="../index/Practica1.html"><b>Práctica 1</b></a></li>
-            <li><a href="./Practica2.html"><b>Práctica 2</b></a></li>
-            <li class="active"><a href="./index/Practica3.html">Práctica 3 <span class="sr-only">(current)</span></a></li>
+            <li><a href="../index/Practica2.html"><b>Práctica 2</b></a></li>
+            <li class="active"><a href="../index/Practica3.html">Práctica 3 <span class="sr-only">(current)</span></a></li>
             <!--<li><a href="./Practica4.html"><b>Práctica 4</b></a></li>
             <li><a href="./Practica5.html"><b>Práctica 5</b></a></li>
             <li><a href="./Practica6.html"><b>Práctica 6</b></a></li>-->
@@ -102,7 +102,7 @@
                     <br>
                     <h2><b>Métodos de resolución</b></h2>
                     <br>
-                    <h3><b>Programación voraz</b></h3>
+                    <h3><b>Búsqueda por BFS</b></h3>
                     <p>
                       En esta algoritmo desechamos las casillas por las que seguro no vamos a pasar y marcamos las que conocemos seguro aunque no hayamos pasado. Algunos ejemplos visuales sobre las anteriores configuraciones (Hechas hasta que haya que arriesgarse).
                     </p>
@@ -117,7 +117,7 @@
                     <br>
                     <h3><b>A*</b></h3>
                     <p>
-                      Utilizamos la misma implementación que en la anterior práctica
+                      Utilizamos la misma implementación que en la anterior práctica. Esta vez sí funciona correctamente, no hay distinciones de costes de casillas por lo que no hay problemas al atravesar barro. Si el vigilante ha cogido el cuchillo y tiene la posición del cadáver, hay un camino seguro de vuelta.
                     </p>
                     <br>
                    
@@ -138,103 +138,49 @@
 
                     <ul>
                       <h4> 
-                        <li><b>Ficha:</b> componente de cada ficha de la matriz 
+                        <li><b>GameManager:</b> componente que controla todos los aspectos visuales 
                           <ul> 
-                            <li><b>Vector2 positionInMatrix:</b> posición lógica de la ficha dentro de la matriz.</li>
-                            <li><b>OnMouseDown():</b>  comprueba el clic en la ficha y llama a <b>SetFichaSeleccionada()</b>, una función del GameManager.</li>
-                            <li><b>SetPositionInMatrix():</b> setter de positionInMatrix.</li>
-                            <li><b>GetPositionInMatrix():</b> getter de positionInMatrix.</li> 
+                            <li><b>CreaTablero():</b> Se encarga de crear un tablero con todas las fichas normales.</li>
+                            <li><b>PonComisaria():</b> Invoca una comisaria en una casilla aleatoria.</li>
+                            <li><b>destapaCasilla():</b> Cuando el vigilante da el siguiente paso, destapa la casilla para saber qué es.</li>
+                            <li><b>TapaTablero():</b> Prepara el tablero para cuando el vigilante comience a patrullar.</li> 
+                            <li><b>OnButton****Click():</b> Administran las funciones de los botones de la escena.</li> 
+                            <li><b>ColocarCuchillo():</b> Coloca un cuchillo según las especificaciones alrededor del cadáver.</li> 
+                            <li><b>OnClick():</b> Según se haya pulsado un botón u otro te permite colocar el cadáver o los agujeros.</li> 
                           </ul> 
                         </li>
                         <br>
-                        <li><b>Casilla:</b> componente de cada casilla de la matriz 
+                        <li><b>DetectiveSearch:</b> componente que controla la búsqueda del cadáver y del cuchillo. 
                           <ul> 
-                            <li><b>Vector2 positionInMatrix:</b> posición lógica de la ficha dentro de la matriz.</li>
-                            <li><b>OnMouseDown():</b>  comprueba el clic en la casilla y llama a <b>OnClick()</b>, una función del GameManager.</li>
+                            <li>
+                              Se encarga de administrar de manera conservadora, las casillas que tiene que explorar el detective para llegar a su meta. Busca una dirección por la que seguir su camino, valora el tipo y dependiendo del mismo, se comporta de una manera u otra.
+                              Si para seguir avanzando no queda otra opción que arriesgar, lo hace, si continúa con vida, sigue el mismo proceso que antes.
+                              <p></p>
+                              Cuando el detective encuentra el cuchillo o el cadáver, deduce dónde podría estar el elemento restante. Cuando tiene los dos, volvería a casa por el camino más corto de entre las casillas exploradas.
+                            </li>
                           </ul> 
                         </li>
-                        <br>
-                        <li>
-                          <b>GameManager:</b> gestiona y realiza los movimientos de la matriz y lee el input de teclado:
-                          <ul>
-                            <li>
-                              <b>Atributos:</b>
-                              <ul>
-                                <li><b>public enum tipoCasilla:</b> Controla lo que hay en un cuadrado del tablero. Si hay solo una casilla, el tipo de esta, si no, indica que hay una ficha.</li>
-                                <li><b>tipoCasilla [,] tablero:</b> Matriz con los tipos de casillas.</li>
-                                <li><b>Atributos que necesita la IA:</b>
-                                  <ul>
-                                    <li><b>int [,] tablero01:</b> Matriz de enteros, solo 0 y 1, que simbolizan casillas disponibles y no disponibles para pasar, respectivamente.</li>
-                                    <li><b>Vector2 posicionInicial:</b> Coordenadas de la ficha que vamos a mover.</li>
-                                    <li><b>Vector2 posicionFinal:</b> Coordenadas del destino de la ficha que queremos mover.</li>
-                                  </ul>
-                                </li>
-                                <li><b>public GameObject Casilla: </b> Prefab de cualquier casilla del tablero</li>
-                                <li><b>public Sprite *******</b> Son los sprites que representan el tipo de casilla (normal, embarrada, bloqueada).</li>
-                                <li><b>public GameObject *******</b> Los gameObjects de las tres fichas y de las tres cruces.</li>
-                                <li><b>GameObject *******</b> Estos gameObjects son los que controlan la ficha que queremos mover y a donde.</li>
-                              </ul>
-                            </li>
-                            <li><b>Start():</b> Llama a <b>CreaFichas()</b> y a <b>CreaTablero()</b></li>
-                            <li><b>Update():</b> De momento solo debug.</li>
-                            <li><b>SetFichaSeleccionada():</b> Se encarga de cambiar la ficha seleccionada, tanto a nivel lógico como a nivel visual.</li>
-                            <li><b>OnClick():</b> Cambia las casillas de tipo y señala la casilla destino en caso de que el anterior click hubiera sido una ficha.</li>
-                            <li><b>Creafichas():</b> Coloca las fichas en un sitio aleatorio del tablero</li>
-                            <li><b>CreaTablero():</b> Rellena tablero de casillas colocando un numero de casillas embarradas y bloqueadas delimitado. Estas casillas tienen una posición aleatoria.</li>
-                          </ul>
-                        </li>
-                        <br>
-                        <li>
-                          <b>Astar1:</b> Componente poseedor del algoritmo de búsqueda.
-                          <ul>
-                            <li><b>Node[,]tableroNode:</b> Guarda la matriz de nodos.</li>
-                            <li><b>bool [,] marked:</b>Marca las casillas que ya no se tienen que comprobar.</li>
-                            <li><b>FastPriorityQueue &lt;Node&gt; open: </b> Almacena los nodos abiertos (que se están procesnado).</li>
-                            <li><b>int[,] tablero: </b> Recibe y guarda los tipos de casilla.</li>
-                            <li>
-                              <b>Class Node:</b> Nodo del tablero.
-                              <ul>
-                                <li><b>Enum state:</b> marcan el estado de del nodo.</li>
-                                <li><b>public Vector2 pos:</b>coordenadas del nodo.</li>
-                                <li><b>Int h:</b> distancia desde el nodo hasta el nodo objetivo.</li>
-                                <li><b>Int cost:</b>el coste que tiene pasar por ella.</li>
-                                <li><b>Int g:</b>coste para llegas a ese nodo.</li>
-                                <li><b>Int f:</b>h + g.</li>
-                                <li><b>public Node Padre:</b> Representa el nodo padre al actual.</li>
-                                <li><b>public Node():</b> Constructora donde se inicializan los atributos anteriores</li>
-                              </ul>
-                            </li>
-                            <li><b>List &lt;Vector2&gt; calculatePath()</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
-                            <li><b>int ManhattanDistance():</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
-                            <li><b>Node addNeighbours():</b> añade vecinos a open y devuelve el nodo solución si lo encuentra.</li>
-                            <li><b>fillMarked():</b> Rellena la matriz marked.</li>
-                            <li><b>void fillTableroNode():</b>rellena la matriz tableroNode.</li>
-                            <li><b>List<Vector2> getPath():</b>devuelve la lista de posiciones del recorrido a partir del nodo final.</li>
-                          </ul>
-                        </li>
+
                       </h4>
                     </ul>
-                    <hr>
+                  <hr>
                   <br>
                      <h2><b>Resultados obtenidos</b></h2>
                      <br>
                     <ul>
                       <h3><li type="disc"><b>Objetivos completados</b></li></h3>
                       <p>
-                        Todo lo relacionado con Unity en la práctica que se utiliza antes de llamar al algoritmo funciona de una manera correcta y eficiente. La implementación de A* utilizada funciona de una manera eficaz.
+                        Las funciones visuales de la práctica van a la perfección, cosa que hemos mejorado respecto a lo anterior. El A* funciona correctamente, ya que al no tener costes según el tipo de casilla, encuentra siempre el camino más corto de vuelta a la comisaría.
                       </p>
                       <br>
                       <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
                       <p>
-                        Cuando la ficha llega a su objetivo, si se vuelve a clicar, aparece en la posición en la que se instanció en el tablero. Creemos que es por un problema de copiar el transform de los gameObjects, pero no hemos conseguido corregirlo por el momento.
+                        La exploración del detective no está completa.
                       </p>
                       <br>
                       <h3><li type="disc"><b>Dificultades</b></li></h3>
                       <p>
-                        La mayor parte de las dificultades las hemos encontrado en el GameManager. A la hora de controlar el click en los gameObjects 2D, los colliders de los objetos están a la misma altura, se solapan. La solución ha sido desactivar el componente BoxCollider2D en las casillas donde estén las fichas. Cuando se mueva la ficha esa casilla volverá a tener el componente activo.  
-                      </p>
-                      <p>
-                        Otro inconveniente fue el control de la ficha seleccionada y de seleccionar posteriormente la casilla destino, donde aparecería una cruz del color de la ficha. Además, hemos llegado a implementar tres versiones de A* para llegar a la óptima para nuestra práctica.
+                        Hay configuraciones que seguramente den fallos, ya que cada vez que se nos ocurría una distribución de agujeros nueva y peculiar, era objeto de darnos problema debido a la interpretación de agujero o casilla segura.
                       </p>
 
                     </ul>
@@ -244,30 +190,9 @@
                     <h2><b>Relación bibliográfica</b></h2>
                     <br>
 
-                    <p><a href="https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A*/" target="_blank" >
-                     https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A* 
+                    <p><a href="https://cv4.ucm.es/moodle/pluginfile.php/5155013/mod_resource/content/0/IAV%20Taller%20y%20pr%C3%A1ctica%203.pdf" target="_blank" >
+                     https://goo.gl/WhRhA1 
                     </a></p>
-                    <p><a href="http://www.stackoverflow.com/" target="_blank" >
-                    www.stackoverflow.com
-                    </p>
-                    <p><a href="http://www.unity3d.com/" target="_blank" >
-                    www.unity3d.com
-                    </p>
-                    <p><a href="http://www.forum.unity.com/" target="_blank" >
-                    www.forum.unity.com 
-                    </p>
-                    <p><a href="http://www.microsoft.com/" target="_blank" >
-                    www.microsoft.com 
-                    </p>
-                    <p><a href="http://buildnewgames.com/astar/" target="_blank" >
-                    http://buildnewgames.com/astar
-                    </p>
-                    <p><a href="http://www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ/" target="_blank" >
-                    www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ
-                    </p>
-                    <p><a href="https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp/" target="_blank" >
-                    https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp
-                    </p>
             </div>
 
           </div>
