@@ -6,11 +6,11 @@
       <meta name="author" content="Grupo 10 - IU" /> 
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
       <!-- Etiquetas para el navegador-->
-      <meta name="keywords" content="IU, HTML, UCM, Kingdom Hearts III, Kingdom, Hearts, III, informática, web" />
-      <meta name="description" content="Kingdom Hearts III" />
+      <meta name="keywords" content="IA, AI, IAV, practicas, Unity, algoritmos, informática, web" />
+      <meta name="description" content="Memorias Practicas IAV" />
 
         <!-- Links -->
-      <link rel="icon" href="../images/logoUCM.png">
+      <link rel="icon" href="./images/logoUCM.png">
         <!-- Bootstrap core CSS -->
       <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
           <!-- Bootstrap theme -->
@@ -23,86 +23,258 @@
 
   <body>
 
-  
     <div class="container-fluid">
-      <div class="row">
+    <div class="row">
 
-        <div class="col-sm-2 col-md-2 sidebar">
-            <a href="./Inicio.html"><img src = "../images/logoUCM.png" class= "img-responsive" alt= "Imagen responsive"></a>
+        <div class="col-xs-3 col-sm-2 col-md-2 sidebar">
+            <a href="../index.html"><img src = "../images/logoUCM.png" class= "img-responsive" alt= "Imagen responsive"></a>
 
             <ul class="nav nav-sidebar">
-            <li><a href="./Inicio.html"><b>Inicio</b></a></li>
-            <li><a href="./Practica1.html"><b>Práctica 1</b></a></li>
+
+            <li><a href="../index.html"><b>Inicio</b></a></li>
+            <li><a href="../index/Practica1.html"><b>Práctica 1</b></a></li>
             <li><a href="./Practica2.html"><b>Práctica 2</b></a></li>
-            <!--<li class="active"><a href="./Practica3.html">Práctica 3<span class="sr-only">(current)</span></a></li>
-            <li><a href="./Practica4.html"><b>Práctica 4</b></a></li>
+            <li class="active"><a href="./index/Practica3.html">Práctica 3 <span class="sr-only">(current)</span></a></li>
+            <!--<li><a href="./Practica4.html"><b>Práctica 4</b></a></li>
             <li><a href="./Practica5.html"><b>Práctica 5</b></a></li>
             <li><a href="./Practica6.html"><b>Práctica 6</b></a></li>-->
 
           </ul>
         </div>
 
-      </div>
 
 
-      <div class="col-sm-5 col-sm-offset-5 col-md-8 col-md-offset-3 main">
-        <div class="row">
+      <div class="col-xs-offset-1 col-xs-10 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3 main">
+      <div class="container-fluid">
+
+      <div class="row">
+
           <div class="jumbotron">
-         
-              <h1>Decisiones de diseño</h1>
+
+              <h1 class="text-center">Práctica 3</h1>
+              <br>
+
+                <h2><b>Resumen</b></h2>
+                <br>
+                 
+                  <p>
+                    En la práctica dos presentamos un tablero compuesto por cincuenta casillas (normal, embarrada, bloqueada, comisaría, sangre, cadáver, cuchillo...) en una matriz de 10x5. El tablero comienza con todas las casillas en "modo" normal. Colocamos la comisaría en una casilla aleatoria. Damos la opción al jugador de colocar el cuerpo en una casilla. Después puede colocar cuantos agujeros quiera. Por último, comenzarían a trabajar los algoritmos para resolver el problema.
+                  </p>
+                
+                <hr>
+                <br>
+
+                <h2><b>Problemas a resolver</b></h2>
+                  <br>
+                  <h3><b>Búsqueda del cadáver y el cuchillo</b></h3>
+                  <p>
+                    El problema a resolver consiste en la exploración de las casillas necesarias para llegar al cadáver y al cuchillo de la manera más conservadora y segura posible. Esto conlleva a evitar exploraciones arriesgadas en las que el policía deba <b>"saltar al vacío"</b>, pudiendo llegar a perder. Algunas configuraciones muy problemáticas serían las siguientes: 
+                  </p>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/configComplicada.png" class= "img-responsive" alt= "Imagen responsive" width = "500" height = "500"></a></div>
+                  </div>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/configComplicada2.png" class= "img-responsive" alt= "Imagen responsive" width = "500" height = "500"></a></div>
+                  </div>
+                  <br>
+                  <p>
+                    La siguiente, sería la configuración más difícil de resolver:
+                  </p>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/configComplicada3.png" class= "img-responsive" alt= "Imagen responsive" width = "500" height = "500"></a></div>
+                  </div>
                   <br>
 
-                <p>
-                  En este apartado definimos las reglas de oro que se cumplen en la página, y las demás decisiones de diseño.
-                </p>
+                  <h3><b>Vuelta a casa</b></h3>
+                  <p>
+                    Sería un problema parecido al de la anterior práctica. Utilizamos A* sobre las casillas ya exploradas para la vuelta a casa. Siempre buscamos el camino que menos casillas recorra.
+                  </p>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/AStarPart.jpg" class= "img-responsive" alt= "Imagen responsive" width = "250" height = "250"></a></div>
+                  </div>
+                  <br>
 
-                <br>
-                <h2><b>Estructura</b></h2>
+                    <hr>
+                    <br>
+                    <h2><b>Métodos de resolución</b></h2>
+                    <br>
+                    <h3><b>Programación voraz</b></h3>
+                    <p>
+                      En esta algoritmo desechamos las casillas por las que seguro no vamos a pasar y marcamos las que conocemos seguro aunque no hayamos pasado. Algunos ejemplos visuales sobre las anteriores configuraciones (Hechas hasta que haya que arriesgarse).
+                    </p>
+                    <br>
+                    <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/configComplicadaAntesArriesgar.png" class= "img-responsive" alt= "Imagen responsive" width = "500" height = "500"></a></div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/configComplicada2AntesArriesgar.png" class= "img-responsive" alt= "Imagen responsive" width = "500" height = "500"></a></div>
+                    </div>
+                    <br>
+                    <h3><b>A*</b></h3>
+                    <p>
+                      Utilizamos la misma implementación que en la anterior práctica
+                    </p>
+                    <br>
+                   
+                    <hr>
+                <br> 
+                    <h2><b>Herramientas utilizadas</b></a></h2>
                     <br>
 
-                <p>
-                  <b>Primero</b> mostramos en gran tamaño un gif del juego, con el título. Si el usuario pulsa el botón de "Ver Tráiler" se reproducirá el trailer de youtube en la propia ventana. Hemos optado por esta opción para poder mostrar el material gráfico más relevante en una primera impresión del juego y así captar la atención del usuario desde el primer momento.
-                </p>
-                <p>
-                 <b>Continúa</b> con una pequeña descripción del juego como introducción de la trama pero sin entrar en detalle, para generar en el usuario curiosidad por la historia y ganas de seguir explorando el juego en la página web.   
-                </p>
-                  <p>
-                  <b>Después</b>, aparecen los logotipos de las plataformas para las que está disponible el videojuego, así como enlaces de compra.
-                </p>
-                 <p>
-                  <b>A continuación</b>, aparecen imágenes y breves descripciones de los protagonistas del videojuego para los usuarios que desconozcan de qué trata la franquicia. Se muestran también los distintos mundos que sirven de escenarios, así como escenas <i>in-game</i> para dar una idea al usuario de cómo serán los escenarios y la interfaz dentro del videojuego.
-                </p>
-                 <p>
-                  <b>Finalmente</b>, la página se cierra con un apartado con la información de la empresa que desarrolla el videojuego, con iconos para las redes sociales de contacto con la misma, y también da crédito a los distintos publishers del juego. 
-                </p>
+                     <h4><li type="disc"><b>Unity:</b> motor de la aplicación</li></h4>
+                     <h4><li type="disc"><b>Monodevelop:</b> Entorno de desarrollo</li></h4>
+                     <h4><li type="disc"><b>C#:</b> lenguaje de programación</li></h4>
+                     <h4><li type="disc"><b>Cola de prioridad externa.</b></li></h4>
 
-                <br>
-                 <h2><b>Reglas de diseño</b></h2>
+                     <hr>
+                <br> 
+                    <h2><b>Implementación</b></a></h2>
+                    <br>
+
+                    <ul>
+                      <h4> 
+                        <li><b>Ficha:</b> componente de cada ficha de la matriz 
+                          <ul> 
+                            <li><b>Vector2 positionInMatrix:</b> posición lógica de la ficha dentro de la matriz.</li>
+                            <li><b>OnMouseDown():</b>  comprueba el clic en la ficha y llama a <b>SetFichaSeleccionada()</b>, una función del GameManager.</li>
+                            <li><b>SetPositionInMatrix():</b> setter de positionInMatrix.</li>
+                            <li><b>GetPositionInMatrix():</b> getter de positionInMatrix.</li> 
+                          </ul> 
+                        </li>
+                        <br>
+                        <li><b>Casilla:</b> componente de cada casilla de la matriz 
+                          <ul> 
+                            <li><b>Vector2 positionInMatrix:</b> posición lógica de la ficha dentro de la matriz.</li>
+                            <li><b>OnMouseDown():</b>  comprueba el clic en la casilla y llama a <b>OnClick()</b>, una función del GameManager.</li>
+                          </ul> 
+                        </li>
+                        <br>
+                        <li>
+                          <b>GameManager:</b> gestiona y realiza los movimientos de la matriz y lee el input de teclado:
+                          <ul>
+                            <li>
+                              <b>Atributos:</b>
+                              <ul>
+                                <li><b>public enum tipoCasilla:</b> Controla lo que hay en un cuadrado del tablero. Si hay solo una casilla, el tipo de esta, si no, indica que hay una ficha.</li>
+                                <li><b>tipoCasilla [,] tablero:</b> Matriz con los tipos de casillas.</li>
+                                <li><b>Atributos que necesita la IA:</b>
+                                  <ul>
+                                    <li><b>int [,] tablero01:</b> Matriz de enteros, solo 0 y 1, que simbolizan casillas disponibles y no disponibles para pasar, respectivamente.</li>
+                                    <li><b>Vector2 posicionInicial:</b> Coordenadas de la ficha que vamos a mover.</li>
+                                    <li><b>Vector2 posicionFinal:</b> Coordenadas del destino de la ficha que queremos mover.</li>
+                                  </ul>
+                                </li>
+                                <li><b>public GameObject Casilla: </b> Prefab de cualquier casilla del tablero</li>
+                                <li><b>public Sprite *******</b> Son los sprites que representan el tipo de casilla (normal, embarrada, bloqueada).</li>
+                                <li><b>public GameObject *******</b> Los gameObjects de las tres fichas y de las tres cruces.</li>
+                                <li><b>GameObject *******</b> Estos gameObjects son los que controlan la ficha que queremos mover y a donde.</li>
+                              </ul>
+                            </li>
+                            <li><b>Start():</b> Llama a <b>CreaFichas()</b> y a <b>CreaTablero()</b></li>
+                            <li><b>Update():</b> De momento solo debug.</li>
+                            <li><b>SetFichaSeleccionada():</b> Se encarga de cambiar la ficha seleccionada, tanto a nivel lógico como a nivel visual.</li>
+                            <li><b>OnClick():</b> Cambia las casillas de tipo y señala la casilla destino en caso de que el anterior click hubiera sido una ficha.</li>
+                            <li><b>Creafichas():</b> Coloca las fichas en un sitio aleatorio del tablero</li>
+                            <li><b>CreaTablero():</b> Rellena tablero de casillas colocando un numero de casillas embarradas y bloqueadas delimitado. Estas casillas tienen una posición aleatoria.</li>
+                          </ul>
+                        </li>
+                        <br>
+                        <li>
+                          <b>Astar1:</b> Componente poseedor del algoritmo de búsqueda.
+                          <ul>
+                            <li><b>Node[,]tableroNode:</b> Guarda la matriz de nodos.</li>
+                            <li><b>bool [,] marked:</b>Marca las casillas que ya no se tienen que comprobar.</li>
+                            <li><b>FastPriorityQueue &lt;Node&gt; open: </b> Almacena los nodos abiertos (que se están procesnado).</li>
+                            <li><b>int[,] tablero: </b> Recibe y guarda los tipos de casilla.</li>
+                            <li>
+                              <b>Class Node:</b> Nodo del tablero.
+                              <ul>
+                                <li><b>Enum state:</b> marcan el estado de del nodo.</li>
+                                <li><b>public Vector2 pos:</b>coordenadas del nodo.</li>
+                                <li><b>Int h:</b> distancia desde el nodo hasta el nodo objetivo.</li>
+                                <li><b>Int cost:</b>el coste que tiene pasar por ella.</li>
+                                <li><b>Int g:</b>coste para llegas a ese nodo.</li>
+                                <li><b>Int f:</b>h + g.</li>
+                                <li><b>public Node Padre:</b> Representa el nodo padre al actual.</li>
+                                <li><b>public Node():</b> Constructora donde se inicializan los atributos anteriores</li>
+                              </ul>
+                            </li>
+                            <li><b>List &lt;Vector2&gt; calculatePath()</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
+                            <li><b>int ManhattanDistance():</b> heurística que calcula el coste de la ruta más barata desde un nodo hasta otro.</li>
+                            <li><b>Node addNeighbours():</b> añade vecinos a open y devuelve el nodo solución si lo encuentra.</li>
+                            <li><b>fillMarked():</b> Rellena la matriz marked.</li>
+                            <li><b>void fillTableroNode():</b>rellena la matriz tableroNode.</li>
+                            <li><b>List<Vector2> getPath():</b>devuelve la lista de posiciones del recorrido a partir del nodo final.</li>
+                          </ul>
+                        </li>
+                      </h4>
+                    </ul>
+                    <hr>
+                  <br>
+                     <h2><b>Resultados obtenidos</b></h2>
                      <br>
+                    <ul>
+                      <h3><li type="disc"><b>Objetivos completados</b></li></h3>
+                      <p>
+                        Todo lo relacionado con Unity en la práctica que se utiliza antes de llamar al algoritmo funciona de una manera correcta y eficiente. La implementación de A* utilizada funciona de una manera eficaz.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
+                      <p>
+                        Cuando la ficha llega a su objetivo, si se vuelve a clicar, aparece en la posición en la que se instanció en el tablero. Creemos que es por un problema de copiar el transform de los gameObjects, pero no hemos conseguido corregirlo por el momento.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Dificultades</b></li></h3>
+                      <p>
+                        La mayor parte de las dificultades las hemos encontrado en el GameManager. A la hora de controlar el click en los gameObjects 2D, los colliders de los objetos están a la misma altura, se solapan. La solución ha sido desactivar el componente BoxCollider2D en las casillas donde estén las fichas. Cuando se mueva la ficha esa casilla volverá a tener el componente activo.  
+                      </p>
+                      <p>
+                        Otro inconveniente fue el control de la ficha seleccionada y de seleccionar posteriormente la casilla destino, donde aparecería una cruz del color de la ficha. Además, hemos llegado a implementar tres versiones de A* para llegar a la óptima para nuestra práctica.
+                      </p>
 
-                  <p><b>Consistencia:</b> En la página se usa terminología del videojuego y el género de fantasía de forma consistente, con referencias a <i>llaves espada</i> y bastones mágicos. Mantiene una concordancia con el uso de colores ligeramente más cálidos de las imágenes del juego y los personajes con los colores frios del fondo.
-                  </p>
+                    </ul>
 
-                  <br>
-                  <p><b>Usabilidad universal:</b> La información que se aporta en la página con respecto al argumento, los mundos, personajes están adaptados para que tanto una persona que no sepa nada del juego como una que lo conozca previamente entiendan a lo que van a jugar. Los enlaces de compra están situados justo debajo del trailer para que un usuario que ya conozca el juego pueda ir sin perder tiempo y comprarlo, mientras que un novato puede seguir bajando, leer más informacion y convencerse</p>
+                    <hr>
+                <br>
+                    <h2><b>Relación bibliográfica</b></h2>
+                    <br>
 
-                  <br>
-                  <p><b>Deshacer cambios:</b> El video se abre en una ventana emergente, lo cual puede molestar a la hora de volver a la página principal. Pero está implementado que pulsando en la "X" o en cualquier sitio fuera del video éste se cierra.</p>
-
-                  <br>
-                  <p><b>Regla de los tres clicks:</b> El usuario puede entrar en la página y en menos de tres clicks comprar el videojuego. Un usuario experimentado podria entrar, ver el video, y al salir acceder directamente al apartado de compra. Un usuario novato tendría que explorar la página entera, pero al estár toda la dirección necesaria en la misma página no se frustra al navegar por la misma.</p>
-                 <br>
-                  <p><b>Reducir la carga de memoria:</b> En la página se ha condensado la información referente a la compra, al juego, y a las redes sociales para simplificar la navegación por la página, reducir el movimiento y generar una sensación de documentación en bloque, mucho más sencilla para el usuario. Los grupos, además, son pequeños y condensan aspectos esenciales de la página.</p>
-
-
+                    <p><a href="https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A*/" target="_blank" >
+                     https://es.wikipedia.org/wiki/Algoritmo_de_b%C3%BAsqueda_A* 
+                    </a></p>
+                    <p><a href="http://www.stackoverflow.com/" target="_blank" >
+                    www.stackoverflow.com
+                    </p>
+                    <p><a href="http://www.unity3d.com/" target="_blank" >
+                    www.unity3d.com
+                    </p>
+                    <p><a href="http://www.forum.unity.com/" target="_blank" >
+                    www.forum.unity.com 
+                    </p>
+                    <p><a href="http://www.microsoft.com/" target="_blank" >
+                    www.microsoft.com 
+                    </p>
+                    <p><a href="http://buildnewgames.com/astar/" target="_blank" >
+                    http://buildnewgames.com/astar
+                    </p>
+                    <p><a href="http://www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ/" target="_blank" >
+                    www.youtube.com/channel/UCJdQxmnPls4rIwxCHS1szTQ
+                    </p>
+                    <p><a href="https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp/" target="_blank" >
+                    https://github.com/BlueRaja/High-Speed-Priority-Queue-for-C-Sharp
+                    </p>
             </div>
 
           </div>
-
+      </div>
+      </div>
       </div>
     </div>
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
