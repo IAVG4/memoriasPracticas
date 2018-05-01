@@ -3,14 +3,14 @@
   <head>
     <!-- Metainformación sobre el documento-->
       <meta charset="utf-8">
-      <meta name="author" content="Grupo 10 - IU" /> 
+      <meta name="author" content="Grupo 4 - IAV" /> 
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
       <!-- Etiquetas para el navegador-->
-      <meta name="keywords" content="IU, HTML, UCM, Kingdom Hearts III, Kingdom, Hearts, III, informática, web" />
-      <meta name="description" content="Kingdom Hearts III" />
+      <meta name="keywords" content="IA, AI, IAV, practicas, Unity, algoritmos, informática, web" />
+      <meta name="description" content="Memorias Practicas IAV" />
 
         <!-- Links -->
-      <link rel="icon" href="../images/logoUCM.png">
+      <link rel="icon" href="./images/logoUCM.png">
         <!-- Bootstrap core CSS -->
       <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
           <!-- Bootstrap theme -->
@@ -23,90 +23,185 @@
 
   <body>
 
-  
     <div class="container-fluid">
-      <div class="row">
+    <div class="row">
 
-        <div class="col-sm-2 col-md-2 sidebar">
-            <a href="./Inicio.html"><img src = "../images/logoUCM.png" class= "img-responsive" alt= "Imagen responsive"></a>
+        <div class="col-xs-3 col-sm-2 col-md-2 sidebar">
+            <a href="../index.html"><img src = "../images/logoUCM.png" class= "img-responsive" alt= "Imagen responsive"></a>
 
             <ul class="nav nav-sidebar">
 
-            <li><a href="./Inicio.html"><b>Inicio</b></a></li>
-            <li><a href="./Practica1.html"><b>Práctica 1</b></a></li>
-            <li><a href="./Practica2.html"><b>Práctica 2</b></a></li>
-            <!--<li><a href="./Practica3.html"><b>Práctica 3</b></a></li>
-            <li class="active"><a href="./Practica4.html">Práctica 4<span class="sr-only">(current)</span></a></li>
-            <li><a href="./Practica5.html"><b>Práctica 5</b></a></li>
+            <li><a href="../index.html"><b>Inicio</b></a></li>
+            <li><a href="../index/Practica1.html"><b>Práctica 1</b></a></li>
+            <li><a href="../index/Practica2.html"><b>Práctica 2</b></a></li>
+            <li><a href="../index/Practica3.html"><b>Práctica 3</b></a></li>
+            <li class="active"><a href="../index/Practica4.html">Práctica 4 <span class="sr-only">(current)</span></a></li>
+            <!--<li><a href="./Practica5.html"><b>Práctica 5</b></a></li>
             <li><a href="./Practica6.html"><b>Práctica 6</b></a></li>-->
-
 
           </ul>
         </div>
 
-      </div>
 
 
+      <div class="col-xs-offset-1 col-xs-10 col-sm-8 col-sm-offset-3 col-md-8 col-md-offset-3 main">
+      <div class="container-fluid">
 
-      <div class="col-sm-5 col-sm-offset-5 col-md-8 col-md-offset-3 main">
-        <div class="row">
+      <div class="row">
+
           <div class="jumbotron">
-         
-              <h1 class="text-center">Objetivos</h1>
+
+              <h1 class="text-center">Práctica 4</h1>
               <br>
-                <p>
-                  Las páginas web de videojuegos pretenden atraer al usuario mostrando un contenido limitado, para que éste se interese por el producto y lo compre.
-                </p>
+
+                <h2><b>Resumen</b></h2>
                 <br>
-                <h2><b>Público objetivo</b></h2>
+                 
+                  <p>
+                    En la práctica cuatro presentamos un tablero compuesto por cincuenta casillas en una matriz de 10x5. Colocamos el refugio en una casilla aleatoria. Damos la opción al jugador de colocar el héroe en una casilla. Después puede colocar aliados (5 como mucho) y zombis (20 como mucho). Si hay un aliado en una casilla y clicamos, será sustituido por un zombi. Si ocurre esta situación con el zombi, la casilla quedará vacía después de ser clicada.
+                  </p>
+                
+                <hr>
                 <br>
-                   <p>
-                   A pesar de la colaboración de Disney, este videojuego tiene una calificación PEGI 12, por lo que se recomienda control parental para menores de dicha edad ya que contiene violencia fantástica.
-                   </p>
-                   <p>
-                   Más allá de la calificación PEGI, el público objetivo de la página web depende de los apartados de esta. Principalmente la página busca la atención de nuevos jugadores. Esto es así debido a la información que se proporciona sobre el juego. Para usuarios que han jugado a entregas anteriores de la saga, esta información es redundante.
-                   </p>
-                   <p>
-                   En la estructura de la página, con solo los dos primeros apartados, un jugador de la saga ya sabe información del nuevo juego y tiene motivos para comprarlo. Sin embargo, para un usuario desconocedor de esta recopilación de juegos, hay que mostrarle más información sobre el universo de Kingdom Hearts, de ahí que se presenten a los personajes, mundos en los que se va a jugar y pequeñas frases motivadoras para terminar de atraer a los nuevos usuarios.
-                   </p>
+
+                <h2><b>Problemas a resolver</b></h2>
+                  <br>
+                  <h3><b>Teoría de la Decisión</b></h3>
+                  <p>
+                    Tenemos que hacer que el héroe (decision maker) identifique la mejor decisión que pueda ser tomada en cada turno. Como se encuentra en un entorno de completa información (conoce el número de aliados activos, el número de zombis y si es de día o de noche) debe calcular con precisión y de una manera "racional".  
+                  </p>
+                  <br>
+                  <div class="text-center">
+                       <div class="col-10 col-md-100"><img src = "../images/Teoría de la Decisión.png" class= "img-responsive" alt= "Imagen responsive" width = "200" height = "200"></a></div>
+                  </div>
+                  <br>
+
+                  <h3><b>Razonamiento probabilístico</b></h3>
+                  <p>
+                    Hemos seguido el razonamiento del enunciado de la práctica. Tenemos el grafo dirigido a la utilidad, sin ciclos y que hacen una serie de distribuciones dependiendo del camino que se siga.
+                  </p>
+                  <p>
+                   La probabilidad de cada nodo depende directamente de la de su padre.
+                  </p>
+                  <br>
+
+                    <hr>
+                    <br>
+                    <h2><b>Métodos de resolución</b></h2>
+                    <br>
+                    <h3><b>Red de Decisión</b></h3>
+                    <p>
+                      Tenemos la red de decisión del enunciado. Compuesta por los <b>nodos de azar</b>:
+                    </p>
+                    <h4>
+                    <ul> 
+                       <li><b>Zombis:</b> Como máximo abrá 20 en la escena.
+                       Para facilitarnos el trabajo hay tres distribuciones( ningún zombi, menos de 5 o más de 5 zombis).</li>
+                       <br>
+
+                       <li><b>Aliados:</b> Seguimos la misma distribución que la de los zombis, abrá como máximo 5 aliados. Las distribuciones son más simples (ninguno, uno o más de uno)</li>
+                       <br>
+
+                       <li><b>Luz:</b> Con el clic derecho cambiamos la iluminación de la escena y además las probabilidades de supervivencia del héroe y aliados. La luz se puede cambiar mientras se ejecuta la partida.</li>
+                       <br>
+                    </ul>
+                    <p>Vamos a explicar el siguiente nivel del grafo:</p>
+                    <ul> 
+                       <li><b>Situación:</b> Depende directamente de la situación de los nodos anteriores (zombis y aliados). Según el número de actores se darán situaciones favorables, desfavorables o neutrales para el héroe</li>
+                       <br>
+
+                       <li><b>Destreza:</b> Depende directamente de la luz y del número de aliados. Este nodo funciona de una manera natural y real. Tenemos más destreza con condiciones favorables (aliados ayudando y con luz en este caso).</li>
+                       <br>
+
+                       <li><b>Acción:</b> Solo hay tres acciones posibles para el héroe (Avanzar, retroceder, esperar).</li>
+                       <br>
+                    </ul>
+                  </h4>
+                    <p>
+                    En el último nivel del grafo, dependiente de todos los anteriores, se forma una tabla completa con las probabilidades de todas las configuraciones. De esta tabla en cada turno se escogerá la mejor opción para el héroe.
+                  </p>
+                    <br>
+                                       
+                    <hr>
+                <br> 
+                    <h2><b>Herramientas utilizadas</b></a></h2>
+                    <br>
+
+                     <h4><li type="disc"><b>Unity:</b> motor de la aplicación</li></h4>
+                     <h4><li type="disc"><b>Monodevelop:</b> Entorno de desarrollo</li></h4>
+                     <h4><li type="disc"><b>C#:</b> lenguaje de programación</li></h4>
+
+                     <hr>
+                <br> 
+                    <h1><b>HASTA AQUÍ TODO LO REDACTADO DE LA PRÁCTICA 4. LO SIGUIENTE NO ESTÁ CAMBIADO.</b></a></h2>
+                    <br>
+                    <h2><b>Implementación</b></a></h2>
+                    <br>
+
+                    <ul>
+                      <h4> 
+                        <li><b>GameManager:</b> componente que controla todos los aspectos visuales 
+                          <ul> 
+                            <li><b>CreaTablero():</b> Se encarga de crear un tablero con todas las fichas normales.</li>
+                            <li><b>PonComisaria():</b> Invoca una comisaria en una casilla aleatoria.</li>
+                            <li><b>destapaCasilla():</b> Cuando el vigilante da el siguiente paso, destapa la casilla para saber qué es.</li>
+                            <li><b>TapaTablero():</b> Prepara el tablero para cuando el vigilante comience a patrullar.</li> 
+                            <li><b>OnButton****Click():</b> Administran las funciones de los botones de la escena.</li> 
+                            <li><b>ColocarCuchillo():</b> Coloca un cuchillo según las especificaciones alrededor del cadáver.</li> 
+                            <li><b>OnClick():</b> Según se haya pulsado un botón u otro te permite colocar el cadáver o los agujeros.</li> 
+                          </ul> 
+                        </li>
+                        <br>
+                        <li><b>DetectiveSearch:</b> componente que controla la búsqueda del cadáver y del cuchillo. 
+                          <ul> 
+                            <li>
+                              Se encarga de administrar de manera conservadora, las casillas que tiene que explorar el detective para llegar a su meta. Busca una dirección por la que seguir su camino, valora el tipo y dependiendo del mismo, se comporta de una manera u otra.
+                              Si para seguir avanzando no queda otra opción que arriesgar, lo hace, si continúa con vida, sigue el mismo proceso que antes.
+                              <p></p>
+                              Cuando el detective encuentra el cuchillo o el cadáver, deduce dónde podría estar el elemento restante. Cuando tiene los dos, volvería a casa por el camino más corto de entre las casillas exploradas.
+                            </li>
+                          </ul> 
+                        </li>
+
+                      </h4>
+                    </ul>
+                  <hr>
+                  <br>
+                     <h2><b>Resultados obtenidos</b></h2>
+                     <br>
+                    <ul>
+                      <h3><li type="disc"><b>Objetivos completados</b></li></h3>
+                      <p>
+                        Las funciones visuales de la práctica van a la perfección, cosa que hemos mejorado respecto a lo anterior. El A* funciona correctamente, ya que al no tener costes según el tipo de casilla, encuentra siempre el camino más corto de vuelta a la comisaría.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
+                      <p>
+                        Puede que haya algún caso de prueba sin contemplar ya que puede haber muchas configuraciones difíciles de tratar o que las hemos pasado por alto.
+                      </p>
+                      <br>
+                      <h3><li type="disc"><b>Dificultades</b></li></h3>
+                      <p>
+                        Hay configuraciones que seguramente den fallos, ya que cada vez que se nos ocurría una distribución de agujeros nueva y peculiar, era objeto de darnos problema debido a la interpretación de agujero o casilla segura.
+                      </p>
+
+                    </ul>
+
+                    <hr>
                 <br>
-                <h2><b>Objetivos de la web</b></h2>
-                <br>
-                <p>
-					Cada apartado de la página tiene su propio objetivo:	
-				</p>
+                    <h2><b>Relación bibliográfica</b></h2>
+                    <br>
 
-				<p>
-					En el primer apartado, simplemente con el video, creamos una curiosidad en el posible comprador del juego. Es un estímulo audiovisual que se asemeja a la experiencia que se obtendrá al jugar el juego.
-				</p>
-
-				<p>
-				En el segundo apartado encontramos una pequeña sinopsis del juego, crea expectación sobre el juego, un pequeño misterio que se resolverá al jugar el mismo.				</p>
-
-				<p>
-					En el tercer apartado se presenta a los protagonistas del juego, tanto visual como descriptivamente. Aquí comienza toda la información que llegará a convencer a un posible nuevo comprador que no conozca las anteriores entregas.
-				</p>
-
-				<p>
-					En el cuarto apartado, se presentan los mundos en los que se podrá jugar. Un pequeño resumen visual de cada uno, acompañado con el nombre que tendrá.
-				</p>
-
-				<p>
-					En el quinto apartado, se muestran las distintas cosas que se pueden hacer dentro del juego creando una motivación en el futuro jugador.
-				</p>
-				
-				<p>
-					Por último, se presentan las redes sociales, donde irá saliendo información del juego hasta la fecha de salida. Además, se pone la licencia de las desarrolladoras y el PEGI.
-				</p>  
-
+                    <p><a href="https://cv4.ucm.es/moodle/pluginfile.php/5155013/mod_resource/content/0/IAV%20Taller%20y%20pr%C3%A1ctica%203.pdf" target="_blank" >
+                     https://goo.gl/WhRhA1 
+                    </a></p>
             </div>
 
           </div>
-
+      </div>
+      </div>
       </div>
     </div>
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -120,3 +215,4 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+
