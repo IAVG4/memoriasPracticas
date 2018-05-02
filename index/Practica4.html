@@ -132,37 +132,41 @@
                      <h4><li type="disc"><b>C#:</b> lenguaje de programación</li></h4>
 
                      <hr>
-                <br> 
-                    <h1><b>HASTA AQUÍ TODO LO REDACTADO DE LA PRÁCTICA 4. LO SIGUIENTE NO ESTÁ CAMBIADO.</b></a></h2>
+                
                     <br>
                     <h2><b>Implementación</b></a></h2>
                     <br>
 
                     <ul>
                       <h4> 
-                        <li><b>GameManager:</b> componente que controla todos los aspectos visuales 
+                        <li><b>GameManager:</b> Componente que controla todos los aspectos visuales y sobre el tablero.
                           <ul> 
-                            <li><b>CreaTablero():</b> Se encarga de crear un tablero con todas las fichas normales.</li>
-                            <li><b>PonComisaria():</b> Invoca una comisaria en una casilla aleatoria.</li>
-                            <li><b>destapaCasilla():</b> Cuando el vigilante da el siguiente paso, destapa la casilla para saber qué es.</li>
-                            <li><b>TapaTablero():</b> Prepara el tablero para cuando el vigilante comience a patrullar.</li> 
-                            <li><b>OnButton****Click():</b> Administran las funciones de los botones de la escena.</li> 
-                            <li><b>ColocarCuchillo():</b> Coloca un cuchillo según las especificaciones alrededor del cadáver.</li> 
-                            <li><b>OnClick():</b> Según se haya pulsado un botón u otro te permite colocar el cadáver o los agujeros.</li> 
+                             <li><b>PersonajeCasilla:</b> Lo utilizamos para saber qué hay en cada casilla. En el caso de los zombis, también los contabilizamos.
+                             </li>
+                            <li><b>CreaTablero():</b> Es muy parecido al de la práctica anterior.</li>
+                            <li><b>PonComisaria():</b> Le ocurre lo mismo que a CreaTablero. La diferencia es que se crea en la parte izquierda. Por la dirección de los sprites de los actores.</li>
+                            <li><b>TurnoZombis():</b> Cada vez que damos al botón Comenzar en la escena, comienza el turno de los zombis</li> 
+                            <li><b>OnButton****Click():</b> Administran las funciones de los botones de la escena.</li>  
+                            <li><b>OnClick():</b> Primero colocamos el héroe. Después según las indicaciones del enunciado, creamos aliados o zombis en las casillas.</li> 
                           </ul> 
                         </li>
                         <br>
-                        <li><b>DetectiveSearch:</b> componente que controla la búsqueda del cadáver y del cuchillo. 
+                        <li><b>MoveZombi:</b> componente que controla el turno de los Zombis 
                           <ul> 
                             <li>
-                              Se encarga de administrar de manera conservadora, las casillas que tiene que explorar el detective para llegar a su meta. Busca una dirección por la que seguir su camino, valora el tipo y dependiendo del mismo, se comporta de una manera u otra.
-                              Si para seguir avanzando no queda otra opción que arriesgar, lo hace, si continúa con vida, sigue el mismo proceso que antes.
-                              <p></p>
-                              Cuando el detective encuentra el cuchillo o el cadáver, deduce dónde podría estar el elemento restante. Cuando tiene los dos, volvería a casa por el camino más corto de entre las casillas exploradas.
+                              Se encarga del movimiento del zombi como de las batallas con los otros personajes. Gracias a un número aleatorio, a la luz y al número de aliados en el campo de batalla.                            
                             </li>
                           </ul> 
                         </li>
 
+                        <br>
+                        <li><b>MoveHeroe:</b> componente que controla el turno del héroe 
+                          <ul> 
+                            <li>
+                              Se comporta de una manera prácticamente igual a la de los zombis lo único que lo hace en el turno del héroe y sólo sobre un gameObject, el héroe.                            
+                            </li>
+                          </ul> 
+                        </li>
                       </h4>
                     </ul>
                   <hr>
@@ -172,17 +176,18 @@
                     <ul>
                       <h3><li type="disc"><b>Objetivos completados</b></li></h3>
                       <p>
-                        Las funciones visuales de la práctica van a la perfección, cosa que hemos mejorado respecto a lo anterior. El A* funciona correctamente, ya que al no tener costes según el tipo de casilla, encuentra siempre el camino más corto de vuelta a la comisaría.
+                        Las funciones visuales de la práctica van a la perfección, lo mantenemos respecto a la práctica anterior. El movimiento y la muerte de los Zombis funciona correctamente y de la forma que esperamos.
+                        En situaciones típicas no hay resultados que nos hayan sorprendido.
                       </p>
                       <br>
                       <h3><li type="disc"><b>Objetivos incompletados</b></li></h3>
                       <p>
-                        Puede que haya algún caso de prueba sin contemplar ya que puede haber muchas configuraciones difíciles de tratar o que las hemos pasado por alto.
+                        No hemos realizado la red Bayesiana, nos ha resultado muy complicado la interpretación del ejemplo del asset store, con sus archivos. Hemos decidido hacer la práctica de una forma más sencilla para llegar al resultado que esperabamos
                       </p>
                       <br>
                       <h3><li type="disc"><b>Dificultades</b></li></h3>
                       <p>
-                        Hay configuraciones que seguramente den fallos, ya que cada vez que se nos ocurría una distribución de agujeros nueva y peculiar, era objeto de darnos problema debido a la interpretación de agujero o casilla segura.
+                        Hemos tenido muchas dificultades intentando optimizar la práctica, con esto nos referimos a no usar GameManager.instance, o GameObject.Find, que son operaciones muy costosas. En algunos casos lo hemos resuelto con creces, pero en otros nos hemos visto obligados a usar estos recursos de Unity.
                       </p>
 
                     </ul>
@@ -194,6 +199,15 @@
 
                     <p><a href="https://cv4.ucm.es/moodle/pluginfile.php/5155013/mod_resource/content/0/IAV%20Taller%20y%20pr%C3%A1ctica%203.pdf" target="_blank" >
                      https://goo.gl/WhRhA1 
+                    </a></p>
+                    <p><a href="https://es.wikipedia.org/wiki/Red_bayesiana" >
+                     https://es.wikipedia.org/wiki/Red_bayesiana
+                    </a></p>
+                    <p><a href="https://www.youtube.com/watch?v=HZlKegL9_I8" >
+                     https://www.youtube.com/watch?v=HZlKegL9_I8
+                    </a></p>
+                    <p><a href="http://digital.csic.es/bitstream/10261/7734/1/eserv.pdf" >
+                     http://digital.csic.es/bitstream/10261/7734/1/eserv.pdf
                     </a></p>
             </div>
 
